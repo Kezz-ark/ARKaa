@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DjFuckNail – SC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --primary: #1db954;
+      --secondary: #191414;
+      --accent: #ff5500;
+      --background: #121212;
+      --header: #242424;
+      --text: #fff;
+      --subtext: #b3b3b3;
+    }
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .sidebar {
+      position: fixed;
+      left: 0; top: 0; bottom: 0;
+      width: 70px;
+      background: var(--header);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 28px;
+      z-index: 10;
+    }
+    .sidebar .logo {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 2rem;
+      font-weight: bold;
+    }
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .sidebar nav a {
+      color: var(--subtext);
+      text-decoration: none;
+      font-size: 1.5rem;
+      transition: color 0.2s;
+    }
+    .sidebar nav a.active,
+    .sidebar nav a:hover {
+      color: var(--primary);
+    }
+    .main {
+      margin-left: 70px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0;
+      background: var(--background);
+    }
+    .header {
+      width: 100%;
+      background: var(--header);
+      padding: 1.5rem 2rem 1.5rem 2rem;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 8px #0002;
+    }
+    .header .user {
+      font-size: 1.1rem;
+      color: var(--primary);
+      font-weight: 600;
+      letter-spacing: 1.2px;
+    }
+    .player-card {
+      background: #181818;
+      border-radius: 18px;
+      margin: 4rem 0 2rem 0;
+      box-shadow: 0 4px 32px 0 #000b;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      max-width: 520px;
+      width: 95vw;
+      padding: 2rem 2.5rem;
+      gap: 2rem;
+      position: relative;
+      min-height: 240px;
+    }
+    .artwork {
+      width: 160px;
+      height: 160px;
+      background: linear-gradient(135deg, var(--accent) 40%, var(--primary) 100%);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.4rem;
+      color: #fff;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 2px #fff2;
+      position: relative;
+    }
+    .artwork::after {
+      content: '';
+      display: block;
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px 0 #0006;
+      pointer-events: none;
+    }
+    .track-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .track-title {
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.3rem;
+      letter-spacing: 1px;
+    }
+    .track-artist {
+      font-size: 1.1rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .player-controls {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+    }
+    audio {
+      width: 100%;
+      outline: none;
+      background: #222;
+      border-radius: 5px;
+    }
+    .footer {
+      margin: 3rem 0 2rem 0;
+      text-align: center;
+      color: var(--subtext);
+      font-size: 1rem;
+      letter-spacing: 1.2px;
+    }
+    @media (max-width: 750px) {
+      .player-card {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1.2rem 1rem;
+        gap: 1rem;
+        min-height: 0;
+        margin-top: 2.5rem;
+      }
+      .main {
+        margin-left: 60px;
+      }
+      .artwork {
+        width: 120px;
+        height: 120px;
+        font-size: 2.5rem;
+      }
+      .track-title {
+        font-size: 1.4rem;
+      }
+    }
+    @media (max-width: 500px) {
+      .sidebar {
+        width: 48px;
+        padding-top: 12px;
+      }
+      .main {
+        margin-left: 48px;
+      }
+      .header {
+        padding: 1rem 0.7rem;
+        font-size: 1.1rem;
+      }
+      .artwork {
+        width: 85px; height: 85px; font-size: 1.4rem;
+      }
+      .player-card {
+        margin-top: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo" title="DjFuckNail">DFN</div>
+    <nav>
+      <a href="#" class="active" title="Home">
+        <svg width="24" height="24" fill="currentColor"><path d="M8 20v-6h8v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+      </a>
+      <a href="https://soundcloud.com/" target="_blank" title="SoundCloud">
+        <svg width="24" height="24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+      </a>
+      <a href="https://spotify.com/" target="_blank" title="Spotify">
+        <svg width="24" height="24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+      </a>
+    </nav>
+  </div>
+  <div class="main">
+    <div class="header">
+      <span>Welcome to <strong>DjFuckNail</strong> Player</span>
+      <span class="user">🎧 DjFuckNail</span>
+    </div>
+    <div class="player-card">
+      <div class="artwork" aria-label="Music Track Artwork">
+        <span>🎶</span>
+      </div>
+      <div class="track-info">
+        <div class="track-title">SC</div>
+        <div class="track-artist">by DjFuckNail</div>
+        <div class="player-controls">
+          <audio controls preload="metadata">
+            <source src="https://cdn.jsdelivr.net/gh/Kezz-ark/ARKaa/DjFuckNail%20-%20SC.mp3" type="audio/mpeg">
+            Sorry, your browser does not support the audio element.
+          </audio>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      &copy; 2025 DjFuckNail<br>
+      Inspired by SoundCloud &amp; Spotify · First release<br>
+      <a href="https://github.com/Kezz-ark/ARKaa" style="color:var(--primary);text-decoration:none;">GitHub Repo</a>
+    </div>
+  </div>
+</body>
+</html>
